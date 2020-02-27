@@ -76,7 +76,7 @@ StatSignif <- ggplot2::ggproto("StatSignif", ggplot2::Stat,
                             group_2 <- complete_data$y[complete_data$x == scales$x$map(comp[2]) & complete_data$PANEL == data$PANEL[1]]
                             p_value <- do.call(test, c(list(group_1, group_2), test.args))$p.value
                             if(FDR==TRUE){
-                              p_value = p.adjust(p_value, method="BH", n=length(comparisons))
+                              p_value = p.adjust(p_value, method="holm", n=length(comparisons))
                             }
                             if(is.numeric(map_signif_level)){
                               temp_value <- names(which.min(map_signif_level[which(map_signif_level > p_value)]))
